@@ -10,6 +10,31 @@ import fs from 'node:fs';
 import path from 'node:path';
 import type { Scheme } from '../src/types/scheme';
 
+// Auto-load .env file if present
+try {
+  const envPath = path.resolve(process.cwd(), '.env');
+  if (fs.existsSync(envPath)) {
+    const envContent = fs.readFileSync(envPath, 'utf-8');
+    for (const line of envContent.split('\n')) {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith('#')) continue;
+      const eqIdx = trimmed.indexOf('=');
+      if (eqIdx !== -1) {
+        const key = trimmed.slice(0, eqIdx).trim();
+        let val = trimmed.slice(eqIdx + 1).trim();
+        if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+          val = val.slice(1, -1);
+        }
+        if (!process.env[key]) {
+          process.env[key] = val;
+        }
+      }
+    }
+  }
+} catch {
+  // Ignore
+}
+
 // System prompt enforcing strict structured JSON output matching YojanaSarthi schema
 const SYSTEM_PROMPT = `
 You are an expert civic-tech policy analyst and data engineer for Indian Government schemes.
@@ -100,42 +125,62 @@ Required documents:
 `;
 
 async function callGemini(apiKey: string, rawText: string): Promise<Scheme> {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+  const candidateModels = [
+    process.env.GEMINI_MODEL,
+    'gemini-flash-latest',
+    'gemini-flash-lite-latest',
+    'gemini-pro-latest'
+  ].filter(Boolean) as string[];
 
-  const payload = {
-    contents: [
-      {
-        role: 'user',
-        parts: [
-          { text: SYSTEM_PROMPT },
-          { text: `Raw Scheme Information to ingest:\n\n${rawText}` }
-        ]
+  let lastError: Error | null = null;
+
+  for (const model of candidateModels) {
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+    const payload = {
+      contents: [
+        {
+          role: 'user',
+          parts: [
+            { text: SYSTEM_PROMPT },
+            { text: `Raw Scheme Information to ingest:\n\n${rawText}` }
+          ]
+        }
+      ],
+      generationConfig: {
+        temperature: 0.1,
+        responseMimeType: 'application/json'
       }
-    ],
-    generationConfig: {
-      temperature: 0.1,
-      responseMimeType: 'application/json'
+    };
+
+    try {
+      console.log(`   Trying model: ${model}...`);
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (!res.ok) {
+        const errText = await res.text();
+        console.warn(`   ⚠️ ${model} returned ${res.status}. Trying next candidate...`);
+        lastError = new Error(`Model ${model} returned ${res.status}: ${errText}`);
+        continue;
+      }
+
+      const data = await res.json() as any;
+      const rawJson = data.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!rawJson) {
+        continue;
+      }
+
+      console.log(`   ✅ Successful structured response from ${model}!`);
+      return JSON.parse(rawJson) as Scheme;
+    } catch (err: any) {
+      lastError = err;
     }
-  };
-
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  });
-
-  if (!res.ok) {
-    const errText = await res.text();
-    throw new Error(`Gemini API error (${res.status}): ${errText}`);
   }
 
-  const data = await res.json() as any;
-  const rawJson = data.candidates?.[0]?.content?.parts?.[0]?.text;
-  if (!rawJson) {
-    throw new Error('Gemini returned an empty response.');
-  }
-
-  return JSON.parse(rawJson) as Scheme;
+  throw lastError || new Error('All candidate models failed.');
 }
 
 // Deterministic Mock/Demo Generator for offline or zero-key testing

@@ -1657,4 +1657,87 @@ export const SCHEMES_DATABASE: Scheme[] = [
       }
     }
   },
+  {
+    "id": "pm-surya-ghar-muft-bijli-yojana",
+    "category": "housing",
+    "level": "central",
+    "ministry": "Ministry of New and Renewable Energy (MNRE)",
+    "officialApplyUrl": "https://pmsuryaghar.gov.in/",
+    "sourceCitation": "Union Cabinet Approval Press Release, Ministry of New and Renewable Energy",
+    "lastVerifiedDate": "2024-03-01",
+    "criteria": {
+      "genders": [
+        "all"
+      ],
+      "states": [
+        "All"
+      ],
+      "area": "all",
+      "categories": [
+        "ALL"
+      ],
+      "occupations": [
+        "all"
+      ],
+      "requiresDisability": false,
+      "requiresBPL": false,
+      "requiresLandOwnership": false,
+      "requiresStudentStatus": false,
+      "requiresWidowOrSingleMother": false,
+      "requiresPregnantOrLactating": false
+    },
+    "i18n": {
+      "en": {
+        "title": "PM Surya Ghar: Muft Bijli Yojana",
+        "tagline": "Rooftop solar installation providing up to 300 units of free electricity monthly.",
+        "shortBenefit": "Up to 300 units of free electricity per month and subsidies up to ₹78,000",
+        "detailedBenefit": "The scheme provides financial assistance through direct subsidies for installing rooftop solar panels, alongside concessional bank loans. Households benefit from substantial savings on electricity bills and up to 300 units of free power every month.",
+        "eligibilityBullets": [
+          "Applicant must be an Indian citizen.",
+          "Must possess a suitable roof with structural strength for solar panels.",
+          "Must have a valid domestic electricity connection in the applicant's or family member's name."
+        ],
+        "requiredDocuments": [
+          "Aadhaar Card",
+          "Electricity Bill",
+          "Bank Passbook",
+          "Roof ownership proof"
+        ]
+      },
+      "hi": {
+        "title": "पीएम सूर्य घर: मुफ्त बिजली योजना",
+        "tagline": "रूफटॉप सोलर इंस्टॉलेशन के साथ प्रति माह 300 यूनिट तक मुफ्त बिजली।",
+        "shortBenefit": "प्रति माह 300 यूनिट तक मुफ्त बिजली और ₹78,000 तक की सब्सिडी",
+        "detailedBenefit": "यह योजना रूफटॉप सोलर पैनल लगाने के लिए सीधी सब्सिडी के माध्यम से वित्तीय सहायता प्रदान करती है। परिवारों को बिजली के बिलों पर भारी बचत मिलती है और हर महीने 300 यूनिट तक मुफ्त बिजली मिलती है।",
+        "eligibilityBullets": [
+          "आवेदक भारत का नागरिक होना चाहिए।",
+          "सौर पैनलों के लिए उपयुक्त छत होनी चाहिए।",
+          "आवेदक या परिवार के सदस्य के नाम पर वैध घरेलू बिजली कनेक्शन होना चाहिए।"
+        ],
+        "requiredDocuments": [
+          "आधार कार्ड",
+          "बिजली बिल",
+          "बैंक पासबुक",
+          "छत के स्वामित्व का प्रमाण"
+        ]
+      },
+      "ta": {
+        "title": "பிரதான் மந்திரி சூர்யா கர்: முஃப்த் பிஜ்லி யோஜனா",
+        "tagline": "மாதத்திற்கு 300 யூனிட் வரை இலவச மின்சாரம் வழங்கும் சூரிய ஒளி கூரை திட்டம்.",
+        "shortBenefit": "மாதத்திற்கு 300 யூனிட் வரை இலவச மின்சாரம் மற்றும் ₹78,000 வரை மானியம்",
+        "detailedBenefit": "இந்தத் திட்டம் கூரையில் சூரிய ஒளி தகடுகளை அமைக்க நேரடி மானியம் மற்றும் சலுகைக் கடன்களை வழங்குகிறது. இதன் மூலம் குடும்பங்கள் மின் கட்டணத்தில் பெரும் சேமிப்பைப் பெறுகின்றன.",
+        "eligibilityBullets": [
+          "விண்ணப்பதாரர் இந்திய குடிமகனாக இருக்க வேண்டும்.",
+          "சூரிய ஒளி தகடுகளை அமைக்க தகுதியான கூரை இருக்க வேண்டும்.",
+          "செல்லுபடியாகும் வீட்டு மின் இணைப்பு இருக்க வேண்டும்."
+        ],
+        "requiredDocuments": [
+          "ஆதார் அட்டை",
+          "மின் கட்டண ரசீது",
+          "வங்கி கணக்கு புத்தகம்",
+          "கூரை உரிமை ஆவணம்"
+        ]
+      }
+    }
+  }
 ];
