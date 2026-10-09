@@ -57,7 +57,7 @@ export const ResultsView: FC<ResultsViewProps> = ({
         origin: { y: 0.6 }
       });
     }
-  }, []);
+  }, [eligibleEvaluations.length]);
 
   const toggleDocCheck = (docName: string) => {
     setCheckedDocs(prev => ({ ...prev, [docName]: !prev[docName] }));

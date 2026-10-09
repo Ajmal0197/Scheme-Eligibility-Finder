@@ -14,13 +14,13 @@ export const ReportModal: FC<ReportModalProps> = ({
   lang,
   onClose
 }) => {
+  const [feedback, setFeedback] = useState<string>('');
+  const [submitted, setSubmitted] = useState<boolean>(false);
+
   if (!scheme) return null;
 
   const t = TRANSLATIONS[lang];
   const loc = scheme.i18n[lang] || scheme.i18n['en'];
-
-  const [feedback, setFeedback] = useState<string>('');
-  const [submitted, setSubmitted] = useState<boolean>(false);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
