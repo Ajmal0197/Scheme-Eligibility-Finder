@@ -33,7 +33,13 @@ export function App() {
     return (localStorage.getItem('yojanasarthi_theme') as 'light' | 'dark') || 'light';
   });
 
-  const [view, setView] = useState<'wizard' | 'results'>('wizard');
+  const [view, setView] = useState<'wizard' | 'results'>(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('view') === 'results') return 'results';
+    }
+    return 'wizard';
+  });
   const [profile, setProfile] = useState<UserProfile>(DEFAULT_PROFILE);
   const [reportScheme, setReportScheme] = useState<Scheme | null>(null);
 
