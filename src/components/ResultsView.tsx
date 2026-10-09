@@ -43,6 +43,7 @@ export const ResultsView: FC<ResultsViewProps> = ({
   const [expandedSchemeId, setExpandedSchemeId] = useState<string | null>(null);
   const [checkedDocs, setCheckedDocs] = useState<Record<string, boolean>>({});
   const [showNearMisses, setShowNearMisses] = useState<boolean>(true);
+  const [mobileTab, setMobileTab] = useState<'schemes' | 'documents' | 'near-misses'>('schemes');
 
   const eligibleEvaluations = evaluations.filter(e => e.isEligible);
   const nearMissEvaluations = evaluations.filter(e => e.isNearMiss && !e.isEligible);
@@ -131,26 +132,53 @@ export const ResultsView: FC<ResultsViewProps> = ({
           </div>
         </div>
 
-        <div className="hero-actions">
+        <div className="hero-actions print-hide">
           <button onClick={onEditProfile} className="btn btn-secondary compact">
             <RotateCcw size={16} />
             {t.editAnswers}
           </button>
-          <button onClick={handlePrint} className="btn btn-secondary compact print-hide">
+          <button onClick={handlePrint} className="btn btn-secondary compact">
             <Printer size={16} />
             {t.results.printChecklist}
           </button>
-          <button onClick={handleWhatsAppShare} className="btn btn-whatsapp compact print-hide">
+          <button onClick={handleWhatsAppShare} className="btn btn-whatsapp compact">
             <Share2 size={16} />
             {t.results.shareWhatsApp}
           </button>
         </div>
       </div>
 
+      {/* Mobile-Only Segment Navigation Tabs */}
+      <div className="mobile-segment-tabs print-hide">
+        <button 
+          className={`segment-tab ${mobileTab === 'schemes' ? 'active' : ''}`}
+          onClick={() => setMobileTab('schemes')}
+        >
+          <span>📋 {lang === 'hi' ? 'योजनाएं' : lang === 'ta' ? 'திட்டங்கள்' : 'Schemes'}</span>
+          <span className="segment-badge">{eligibleEvaluations.length}</span>
+        </button>
+        <button 
+          className={`segment-tab ${mobileTab === 'documents' ? 'active' : ''}`}
+          onClick={() => setMobileTab('documents')}
+        >
+          <span>📄 {lang === 'hi' ? 'दस्तावेज' : lang === 'ta' ? 'ஆவணங்கள்' : 'Documents'}</span>
+          <span className="segment-badge">{consolidatedDocs.length}</span>
+        </button>
+        {nearMissEvaluations.length > 0 && (
+          <button 
+            className={`segment-tab ${mobileTab === 'near-misses' ? 'active' : ''}`}
+            onClick={() => setMobileTab('near-misses')}
+          >
+            <span>⚠️ {lang === 'hi' ? 'लगभग पात्र' : lang === 'ta' ? 'அடுத்தவை' : 'Near-Miss'}</span>
+            <span className="segment-badge">{nearMissEvaluations.length}</span>
+          </button>
+        )}
+      </div>
+
       {/* Main Grid: Left is Schemes, Right is Consolidated Document Checklist */}
       <div className="results-grid">
         {/* Left Column: Schemes Directory */}
-        <div className="schemes-column">
+        <div className={`schemes-column ${mobileTab === 'schemes' ? 'mobile-visible' : 'mobile-hidden'}`}>
           {/* Search & Category Filter Toolbar */}
           <div className="filter-toolbar print-hide">
             <div className="search-box">
@@ -314,7 +342,7 @@ export const ResultsView: FC<ResultsViewProps> = ({
 
           {/* Near Misses Section */}
           {nearMissEvaluations.length > 0 && (
-            <div className="near-misses-container">
+            <div className={`near-misses-container ${mobileTab === 'near-misses' ? 'mobile-tab-focused' : (mobileTab === 'schemes' ? '' : 'mobile-hidden')}`}>
               <div
                 className="near-misses-header"
                 onClick={() => setShowNearMisses(prev => !prev)}
@@ -357,7 +385,7 @@ export const ResultsView: FC<ResultsViewProps> = ({
         </div>
 
         {/* Right Column: Consolidated Document Checklist */}
-        <aside className="checklist-column">
+        <aside className={`checklist-column ${mobileTab === 'documents' ? 'mobile-visible' : 'mobile-hidden'}`}>
           <div className="checklist-card">
             <div className="checklist-card-header">
               <div className="checklist-icon-wrap">
@@ -416,6 +444,22 @@ export const ResultsView: FC<ResultsViewProps> = ({
             </div>
           </div>
         </aside>
+      </div>
+
+      {/* Mobile Floating Bottom Bar */}
+      <div className="mobile-floating-bar print-hide">
+        <button onClick={onEditProfile} className="floating-bar-btn secondary">
+          <RotateCcw size={15} />
+          <span>{t.editAnswers}</span>
+        </button>
+        <button onClick={handleWhatsAppShare} className="floating-bar-btn whatsapp">
+          <Share2 size={15} />
+          <span>WhatsApp</span>
+        </button>
+        <button onClick={handlePrint} className="floating-bar-btn print">
+          <Printer size={15} />
+          <span>Print</span>
+        </button>
       </div>
     </div>
   );
