@@ -1,0 +1,81 @@
+{
+  "id": "pm-surya-ghar",
+  "category": "housing",
+  "level": "central",
+  "ministry": "Ministry of New and Renewable Energy",
+  "officialApplyUrl": "https://pmsuryaghar.gov.in/",
+  "sourceCitation": "PM Surya Ghar Guidelines (pmsuryaghar.gov.in)",
+  "lastVerifiedDate": "2026-10-09",
+  "criteria": {
+    "minAge": 18,
+    "genders": [
+      "all"
+    ],
+    "states": [
+      "All"
+    ],
+    "area": "all",
+    "categories": [
+      "ALL"
+    ],
+    "requiresBPL": false,
+    "requiresDisability": false,
+    "requiresLandOwnership": false,
+    "requiresStudentStatus": false,
+    "requiresWidowOrSingleMother": false,
+    "requiresPregnantOrLactating": false
+  },
+  "i18n": {
+    "en": {
+      "title": "PM Surya Ghar: Muft Bijli Yojana (Rooftop Solar)",
+      "tagline": "Free rooftop solar subsidy up to ₹78,000 providing 300 units of free power monthly",
+      "shortBenefit": "Subsidy up to ₹78,000 for rooftop solar + up to 300 free electricity units/month",
+      "detailedBenefit": "Provides direct central capital subsidies of ₹30,000 (1kW), ₹60,000 (2kW), and ₹78,000 (3kW+) to install rooftop solar systems and eliminate household power bills.",
+      "eligibilityBullets": [
+        "Indian citizen household with valid domestic electricity connection",
+        "Must possess suitable rooftop space for solar panel installation",
+        "Household should not have claimed previous solar subsidies for same roof"
+      ],
+      "requiredDocuments": [
+        "Aadhaar Card",
+        "Latest Electricity Bill (Domestic Connection)",
+        "Aadhaar-linked Bank Passbook",
+        "Electricity Consumer Number"
+      ]
+    },
+    "hi": {
+      "title": "पीएम सूर्य घर: मुफ्त बिजली योजना (रूफटॉप सोलर)",
+      "tagline": "घर की छत पर सोलर पैनल लगाने हेतु ₹78,000 तक की सब्सिडी और हर महीने 300 यूनिट मुफ्त बिजली",
+      "shortBenefit": "सोलर पैनल पर ₹78,000 तक की सब्सिडी + प्रति माह 300 यूनिट मुफ्त बिजली",
+      "detailedBenefit": "घरों की छतों पर सोलर सिस्टम लगाने के लिए केंद्र सरकार द्वारा 1 किलोवाट पर ₹30,000, 2 किलोवाट पर ₹60,000 तथा 3 किलोवाट पर ₹78,000 की सीधी नकद सब्सिडी दी जाती है।",
+      "eligibilityBullets": [
+        "वैध घरेलू बिजली कनेक्शन धारक भारतीय नागरिक",
+        "छत पर सोलर पैनल लगाने हेतु पर्याप्त खुली जगह होनी चाहिए",
+        "पहले से उसी छत पर सोलर सब्सिडी न ली हो"
+      ],
+      "requiredDocuments": [
+        "आधार कार्ड",
+        "हालिया घरेलू बिजली बिल",
+        "आधार लिंक बैंक पासबुक",
+        "बिजली उपभोक्ता संख्या"
+      ]
+    },
+    "ta": {
+      "title": "பிரதமர் சூரிய இல்லம்: இலவச மின்சார திட்டம் (PM Surya Ghar)",
+      "tagline": "வீட்டு கூரையில் சோலார் அமைக்க ₹78,000 மானியம் மற்றும் மாதம் 300 யூனிட் இலவச மின்சாரம்",
+      "shortBenefit": "₹78,000 வரை சோலார் மானியம் + மாதம் 300 யூனிட் வரை இலவச மின்சாரம்",
+      "detailedBenefit": "வீட்டு கூரைகளில் சோலார் பேனல்கள் பொருத்த 1kW-க்கு ₹30,000, 2kW-க்கு ₹60,000 மற்றும் 3kW-க்கு ₹78,000 வரை நேரடி வங்கி மானியம் வழங்கப்படுகிறது.",
+      "eligibilityBullets": [
+        "சொந்தமாக மின் இணைப்பு வைத்துள்ள இந்திய குடிமக்கள்",
+        "சோலார் பேனல் அமைக்க தகுதியான வீட்டு கூரை வசதி இருக்க வேண்டும்",
+        "முன்பு இந்த திட்டத்தில் மானியம் பெற்றிருக்கக்கூடாது"
+      ],
+      "requiredDocuments": [
+        "ஆதார் அட்டை",
+        "சமீபத்திய மின் கட்டண ரசீது",
+        "வங்கி கணக்கு புத்தகம்",
+        "மின் நுகர்வோர் எண்"
+      ]
+    }
+  }
+}
